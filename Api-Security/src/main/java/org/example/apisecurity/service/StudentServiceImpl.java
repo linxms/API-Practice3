@@ -18,6 +18,20 @@ public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> impl
     public StudentServiceImpl(StudentMapper studentMapper){this.baseMapper = studentMapper;}
     @Override
     public IPage<Student> selectPage(Page<Student> page, Student student) {
-        return null;
+        try {
+            LambdaQueryWrapper<Student> wrapper=new LambdaQueryWrapper<>();
+            wrapper.like(student.getId()!=null, Student::getId, student.getId())
+                    .like(student.getName()!=null, Student::getName, student.getName())
+                    .like(student.getStudent_no()!=null, Student::getStudent_no, student.getStudent_no())
+                    .like(student.getBirth()!=null, Student::getBirth, student.getBirth())
+                    .like(student.getGender()!=null, Student::getGender, student.getGender());
+            IPage<Student> pages= this.baseMapper.selectPage(page,wrapper);
+            if(pages==null){
+                throw new RuntimeException("未知异常");
+            }
+            return pages;
+        }catch (Exception e){
+            throw new RuntimeException(e.getMessage());
+        }
     }
 }

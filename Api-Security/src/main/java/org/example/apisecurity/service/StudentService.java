@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import org.example.apisecurity.entity.Student;
 import org.springframework.stereotype.Service;
 
-@Service
+
 public interface StudentService extends IService<Student> {
 
     IPage<Student> selectPage(Page<Student> page , Student student);
