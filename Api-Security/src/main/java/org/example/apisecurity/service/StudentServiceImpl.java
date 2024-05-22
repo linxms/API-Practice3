@@ -21,8 +21,8 @@ public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> impl
         try {
             LambdaQueryWrapper<Student> wrapper=new LambdaQueryWrapper<>();
             wrapper.like(student.getId()!=null, Student::getId, student.getId())
-                    .like(student.getName()!=null, Student::getName, student.getName())
                     .like(student.getStudent_no()!=null, Student::getStudent_no, student.getStudent_no())
+                    .like(student.getName()!=null, Student::getName, student.getName())
                     .like(student.getBirth()!=null, Student::getBirth, student.getBirth())
                     .like(student.getGender()!=null, Student::getGender, student.getGender());
             IPage<Student> pages= this.baseMapper.selectPage(page,wrapper);
